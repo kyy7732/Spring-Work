@@ -16,7 +16,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class UserVO {
 
-	// join에 name과 똑같은 이름을 사용해야함
+	// join.jsp에 name과 똑같은 이름을 사용해야함
 
 	private String userId;
 	private String userPw;

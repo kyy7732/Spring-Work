@@ -107,13 +107,11 @@ public class RequestController {
 	 	수행할 수 있음. (VO 보다는 역할이 좀 더 많고, 특정 목적을 가진 객체)
 	 */
 	
-	@PostMapping("/join")
+	@PostMapping("/join") // join을 처리할 객체를 찾는 방법
 	public void register(UserVO vo) {
 		System.out.println(vo);
 		
 	}
-	
-	
 }
 
 
