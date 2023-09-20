@@ -43,7 +43,7 @@ public class Score {
 	        this.math = dto.getMath();
 	        calcTotalAndAvg(); // 총점, 평균 계산
 	        calcGrade(); // 학점 계산
-	    }
+	 }
 
 	    private void calcGrade() {
 	        if (average >= 90) {
