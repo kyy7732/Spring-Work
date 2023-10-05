@@ -91,7 +91,7 @@ public class ScoreController {
 	
 	// 6. 수정 처리 완료 하기
 	@PostMapping("/modify")
-	public String modify(int stuNum, ScoreRequestDTO dto) { // *****3가지인 이유??
+	public String modify(int stuNum, ScoreRequestDTO dto) { 
 		System.out.println("/score/modify: POST!");
 		
 		service.modify(stuNum, dto);

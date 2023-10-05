@@ -43,6 +43,7 @@ public class ScoreRepositoryImpl implements IScoreRepository {
 		// SCORE_MAP에서 value들만 전부 뽑아낸 뒤, ArrayList의 생성자의 매개값으로 전달해서
 		// List로 포장.
 		List<Score> scoreList = new ArrayList<>(SCORE_MAP.values()); // map의 value들만 뽑아서 arrayList로 포장해서 넘긴다. 
+		System.out.println(scoreList);
 		return scoreList;
 	}
 
