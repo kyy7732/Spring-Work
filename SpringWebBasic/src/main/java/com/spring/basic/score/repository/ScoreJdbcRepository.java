@@ -32,7 +32,7 @@ public class ScoreJdbcRepository implements IScoreRepository {
 	public ScoreJdbcRepository() {
 		try {
 			// 해당 객체를 강제로 깨우는 메서드
-			Class.forName("oracle.jdbc.driver.OracleDriver"); // 자바프로그램과 데이터 베이스간외 통로를 연결해주는
+			Class.forName("oracle.jdbc.driver.OracleDriver"); // 자바프로그램과 데이터 베이스간의 통로를 연결해주는
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -143,13 +143,8 @@ public class ScoreJdbcRepository implements IScoreRepository {
 
 	@Override
 	public Score findByStuNum(int stuNum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteByStuNum(int stuNum) {
-		String sql = "DELETE FROM score "
+		Score s = null;
+		String sql = "SELECT * FROM score "
 					+ "WHERE stu_num = ? ";
 		
 		try {
@@ -157,11 +152,53 @@ public class ScoreJdbcRepository implements IScoreRepository {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			
 			pstmt.setInt(1, stuNum);
 			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				s = new Score(
+					rs.getInt("stu_num"),
+					rs.getString("stu_name"),
+					rs.getInt("kor"),
+					rs.getInt("eng"),
+					rs.getInt("math"),
+					rs.getInt("total"),
+					rs.getDouble("average"),
+					Grade.valueOf(rs.getString("grade"))
+				);
+			return s;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return s;
+	}
+
+	@Override
+	public void deleteByStuNum(int stuNum) {
+		String sql = "DELETE FROM score "
+					+ "WHERE stu_num = ? ";
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, stuNum);
 			
 			int dlrn = pstmt.executeUpdate();
+			
 			if(dlrn == 1) {
 				System.out.println("delete 성공!");
 			} else {
@@ -184,7 +221,7 @@ public class ScoreJdbcRepository implements IScoreRepository {
 
 	@Override
 	public void modify(Score modScore) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

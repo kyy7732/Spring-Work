@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.spring.basic.score.dto.ScoreListResponseDTO;
 import com.spring.basic.score.dto.ScoreRequestDTO;
 import com.spring.basic.score.entity.Score;
+import com.spring.basic.score.repository.IScoreMapper;
 import com.spring.basic.score.repository.IScoreRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,15 @@ import lombok.RequiredArgsConstructor;
 // 컨트롤러와 레파지토리 사이에 배치되어 기타 비즈니스 로직 처리
 // ex) 값을 가공, 예외 처리, dto로 변환, 트랜잭션 등등...
 @Service // 빈 등록
-//@RequiredArgsConstructor // final 생성자 만듦
+@RequiredArgsConstructor // final 생성자 만듦
 public class ScoreService {
 	
-	private final IScoreRepository scoreRepository;
+	private final IScoreMapper scoreRepository;
 	
-	@Autowired // @RequiredArgsConstructor인데 @Qualifier로 지목을 하기위해 주석처리 한 후 직접 생성 함
-    public ScoreService(@Qualifier("jdbc") IScoreRepository scoreRepository) {
-        this.scoreRepository = scoreRepository;
-    }
+//	@Autowired // @RequiredArgsConstructor인데 @Qualifier로 지목을 하기위해 주석처리 한 후 직접 생성 함
+//    public ScoreService(@Qualifier("spring") IScoreRepository scoreRepository) {
+//        this.scoreRepository = scoreRepository;
+//    }
 	
 	// 등록 중간처리
 	// 컨트롤러는 나에게 DTO를 줬어.
@@ -56,8 +57,8 @@ public class ScoreService {
 	}
 
 	// 학생 점수 개별 조회
-	public Score retrieve(int stuNum) {
 		// 응답하는 화면에 맞는 DTO를 선언해서 주어야 하는 것이 원칙.
+	public Score retrieve(int stuNum) {
 		// 만약에 Score 전체 데이터가 필요한 것이 아니라면
 		// 몇 개만 추리고 가공할 수 있는 DTO를 설계해서 리턴하는 것이 맞습니다.
 		return scoreRepository.findByStuNum(stuNum);
