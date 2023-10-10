@@ -22,6 +22,7 @@ public class BoardController {
 
 	private final BoardService service;
 	
+	
 	// 글 작성 화면을 열어주는 메서드
 	@GetMapping("/write")
 	public void write() { // /board/write로 요청을 보내줌
