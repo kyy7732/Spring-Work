@@ -67,12 +67,7 @@ public class ScoreService {
 	public void delete(int stuNum) {
 		scoreRepository.deleteByStuNum(stuNum);
 	}
-	/*
-	public void fix(int stuNum) {
-		scoreRepository.fixStuNum(stuNum);
-	}
-	*/
-	
+
 	public void modify(int stuNum, ScoreRequestDTO dto) {
 		Score score = scoreRepository.findByStuNum(stuNum);
 		score.changeScore(dto);

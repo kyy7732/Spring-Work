@@ -15,16 +15,12 @@ public interface IScoreMapper {
 		// 성적 정보 개별 조회
 		Score findByStuNum(int stuNum); // Score로 리턴
 
+		// 성적 정보 수정
+		void modify(Score modScore);
+		
 		// 성적 정보 삭제
 		void deleteByStuNum(int stuNum);
 		
-		
-		// 성적 정보 수정
-		void fixStuNum(int stuNum);
-		
-		
-		// 성적 정보 수장
-		void modify(Score modScore);
 		
 	
 }

@@ -1,4 +1,4 @@
-package com.spring.basic.board.board.repository;
+package com.spring.basic.board.repository;
 
 import java.util.List;
 
