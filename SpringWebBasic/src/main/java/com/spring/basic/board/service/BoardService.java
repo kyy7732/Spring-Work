@@ -57,7 +57,6 @@ public class BoardService {
 									.title(title)
 									.content(content)
 									.build());
-		
 	}
 
 	public void delete(int boardNo) {
