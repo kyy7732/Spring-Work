@@ -34,7 +34,7 @@ CREATE SEQUENCE freeboard_seq
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FreeBoard {
+public class FreeBoard { // entity
 	
 	private int bno;
 	private String title;

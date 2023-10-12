@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
+@Getter
 @ToString @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class FreeDetailDTO {
 	private String title;
 	private String writer;
 	private String content;
-	private String Date;
+	private String date;
 	
 	public FreeDetailDTO(FreeBoard board) {
 		super();
@@ -32,20 +32,24 @@ public class FreeDetailDTO {
 		this.title = board.getTitle();
 		this.writer = board.getWriter();
 		this.content = board.getContent();
-		this.Date = makePrettierDateString(fix(board.getUpdateDate(), board.getRegDate()));
-	}
-
-	private String makePrettierDateString(LocalDateTime regDate) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			return dtf.format(regDate);
-	
-	}
-	
-	private LocalDateTime fix(LocalDateTime regDate, LocalDateTime board) {
-		if(regDate == null) {
-			return board;
+//		if(board.getUpdateDate() == null) { 선생님 작성 방법
+//			this.date = FreeListResponseDTO.makePrettierDateString(board.getRegDate());
+//		} else {
+//			this.date = FreeListResponseDTO.makePrettierDateString(board.getUpdateDate()) + " (수정됨)";
+//		}
+		
+		if(fix(board.getUpdateDate(), board.getRegDate()).equals(board.getRegDate())) {
+			this.date = FreeListResponseDTO.makePrettierDateString(fix(board.getUpdateDate(), board.getRegDate()));
+		} else {
+			this.date = FreeListResponseDTO.makePrettierDateString(fix(board.getUpdateDate(), board.getRegDate())) + "(수정됨)";
 		}
+	}
+	
+	private LocalDateTime fix(LocalDateTime update, LocalDateTime regDate) {
+		if(update == null) {
 			return regDate;
+		}
+			return update;
 	}
 	
 	

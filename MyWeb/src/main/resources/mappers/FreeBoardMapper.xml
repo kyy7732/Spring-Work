@@ -14,6 +14,12 @@
 	
 	<select id="getList" resultType="freeboard"> <!-- mybatis-config에서 resultType으로 freeboard설정함 -->
 		SELECT * FROM freeboard
+		ORDER BY bno DESC
+	</select>
+	
+	<select id="getTotal" resultType="int"> <!-- 리턴타입은 int다 -->
+		SELECT COUNT(*)
+		FROM freeboard
 	</select>
 	
 	<select id="getContent" resultType="freeboard">
