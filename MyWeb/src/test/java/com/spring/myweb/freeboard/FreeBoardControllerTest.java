@@ -18,10 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.myweb.freeboard.controller.FreeBoardController;
-import com.spring.myweb.freeboard.dto.FreeDetailDTO;
-import com.spring.myweb.freeboard.dto.FreeListResponseDTO;
-import com.spring.myweb.freeboard.dto.FreeModifyRequestDTO;
-import com.spring.myweb.freeboard.dto.FreeRegistRequestDTO;
+import com.spring.myweb.freeboard.dto.request.FreeModifyRequestDTO;
+import com.spring.myweb.freeboard.dto.request.FreeRegistRequestDTO;
+import com.spring.myweb.freeboard.dto.response.FreeDetailDTO;
+import com.spring.myweb.freeboard.dto.response.FreeListResponseDTO;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
