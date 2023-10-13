@@ -25,7 +25,7 @@ public class FreeBoardController {
 	
 	private final IFreeBoardService service;
 	
-	// 페이징이 들어간 목록 화면
+	// 페이징이 들어간 목록 화면 // 페이징 : (페이지를 나눌 화면)
 	@GetMapping("/freeList")
 	public void freeList(Page page, Model model) {
 		System.out.println("/freeboard/freeList: GET!");

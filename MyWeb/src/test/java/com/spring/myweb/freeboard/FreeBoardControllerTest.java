@@ -91,7 +91,6 @@ public class FreeBoardControllerTest {
 		ModelAndView viewContent = mockMvc.perform(MockMvcRequestBuilders.get("/freeboard/freeContent")
 														.param("bno", "1")
 				).andReturn().getModelAndView();
-		System.out.println("1번 글 상세보기 : " + viewContent.getModelMap().get("boardContent"));
 		
 		assertEquals("freeboard/freeDetail", viewContent.getViewName()); // 주소값으로 잘 보내 졋는가
 		FreeDetailDTO dto = (FreeDetailDTO) viewContent.getModelMap().get("boardContent");
