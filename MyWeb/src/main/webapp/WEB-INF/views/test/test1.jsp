@@ -50,7 +50,7 @@
             const xhr = new XMLHttpRequest();
 
             /*
-            2. http 요청 설정 (요청 방식, 요청 URL)
+            2. http 요청 설정 (요청 방식, 요청 URL) rest에서는 url이 간결해지기때문에 전송방식으로 대충 파악해야함
             - 요청 방식
             a. GET - 조회 
             b. POST - 등록
@@ -59,13 +59,13 @@
             */
             xhr.open('POST', '/myweb/rest/object'); // (보낼 요청 방식, 요청 URL)
 
-            // 3. 서버로 전송할 데이터를 제작합니다.
+            // 3. 서버로 전송할 데이터를 제작합니다. (JSON은 언어가 아니고 표기법일뿐이다)
             // 제작하는 데이터의 형식은 JSON 형태여야 합니다. json은 자바스크립트가 아니고 표기법만 유사할 뿐이다.
             const data = {
                 'name' : name,
                 'age' : age,
                 'hobby' : arr
-            }; // 이 객체는 JSON이 아니라 JavaScript 객체이다.
+            }; // 이 객체는 JSON이 아니라 JavaScript 객체이다. JS로 바로 보내면 JAVA에서 못 알아먹는다.
 
             // JS(자바 스크립트) -> JSON으로 변경: JSON.stringify(arg)
             const sendData = JSON.stringify(data);
@@ -82,9 +82,9 @@
                 console.log(xhr.status);
                 // 응답 데이터 확인
                 console.log(xhr.response);
-            }
+           }
 
-        }
+        };
 
     </script>
 

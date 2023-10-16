@@ -40,7 +40,7 @@
 				FROM
 				(
 				SELECT * FROM freeboard
-				<include refid="search" />
+				<include refid="search" /> <!-- sql 만들어서 삽입 -->
 				ORDER BY bno DESC
 				) tbl
 		)
