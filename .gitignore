@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
 Servers/
+target/
+properties/
 
 ### Eclipse ###
 .metadata
@@ -15,6 +17,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
+*.properties
 
 # External tool builders
 .externalToolBuilders/

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 이메일 인증 관련 빈 등록 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- 디스패쳐 서블릿이 가동이될때 읽어와라(xml파일 만들때마다 만들기 귀찮아서) -->
+		<property name="host" value="smtp.naver.com" /> <!-- 메일함 환경설정 pop3/imap 설정 -> pop3/smtp설정 -> pop3/smtp사용 사용함 -->
+		<property name="port" value="465" /> <!-- SMTP 서버명, SMTP 포트 -->
+		<property name="username" value="${naver.account}" />
+		<property name="password" value="${naver.password}" />
+		
+		<property name="javaMailProperties">
+            <props>
+                <!-- gmail: <prop key="mail.smtp.starttls.enable">true</prop>-->
+                <!-- 네이버: --> <prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.smtp.auth">true </prop>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtps.ssl.trust">*</prop>
+                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+        </property>
+        
+	</bean>
+	
+	
+	
+</beans>
