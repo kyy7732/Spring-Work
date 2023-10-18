@@ -4,36 +4,78 @@
 
 <mapper namespace="com.spring.myweb.user.mapper.IUserMapper">
 
+	<!-- collection 타입의 변수에 값을 매길 때에는
+	 어떤 객체로 포장해서 넣을지를 새로운 resultMap으로 선언해 주셔야 합니다.
+	 sql에서 조회하는 컬럼에 대한 모든 정보를 작성해 주셔야 합니다. -->
+
+	<resultMap type="user" id="userMap"> <!-- users table에서 가져올 내용 type에 user은 mybatic에 약어로 등록해놨음 -->
+		<result property="userName" column="user_name" />
+		<result property="userPhone1" column="user_phone1" />
+		<result property="userPhone2" column="user_phone2" />
+		<result property="userEmail1" column="user_email1" />
+		<result property="userEmail2" column="user_email2" />
+		<result property="addrBasic" column="addr_basic" />
+		<result property="addrDetail" column="addr_detail" />
+		<result property="addrZipNum" column="addr_zip_num" />
+		<collection property="userBoardList" resultMap="list" /> <!-- collection을 작성할때는 result로 모든값을 넣어야함 -->
+	</resultMap>
+
+	<!-- 위에 있는 collection에 들어갈 객체가 어떤 식으로 포장될 지를 명시해 주는 resultMap -->
+	<resultMap type="freeboard" id="list"> <!-- freeboard를 담는 리스트 -->
+		<id property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="regDate" column="reg_date" />
+	</resultMap>
+
 	<insert id="join">
 		INSERT INTO users
-		(user_id, user_pw, user_name, user_phone1, user_phone2,
-		 user_email1, user_email2, addr_basic, addr_detail, addr_zip_num) <!-- reg_date때문에 값입력해야함 --> -->
-		VALUES(#{userId}, #{userPw}, #{userName}, #{userPhone1}, #{userPhone2},
-		 #{userEmail1}, #{userEmail2}, #{addrBasic}, #{addrDetail}, <!-- mybatis 같은 경우는 설정이 없을시 파라미터값에 null이 들어가면 에러발생 -->
-		  #{addrZipNum})
+		(user_id, user_pw, user_name, user_phone1,
+		user_phone2,
+		user_email1, user_email2, addr_basic, addr_detail, addr_zip_num) <!-- reg_date때문에 값입력해야함 -->
+		-->
+		VALUES(#{userId}, #{userPw}, #{userName}, #{userPhone1},
+		#{userPhone2},
+		#{userEmail1}, #{userEmail2}, #{addrBasic}, #{addrDetail}, <!-- mybatis 같은 경우는 설정이 없을시 
+			파라미터값에 null이 들어가면 에러발생 -->
+		#{addrZipNum})
 	</insert>
 
 	<select id="idCheck" resultType="int">
 		SELECT COUNT(*)
 		FROM users
-		WHERE user_id = #{id}
+		WHERE
+		user_id = #{id}
 	</select>
 
 	<select id="login" resultType="string">
 		SELECT user_pw FROM users
-		WHERE user_id = #{id}
+		WHERE
+		user_id = #{id}
 	</select>
 
-	<select id="getInfo" resultType="user">
-		SELECT * FROM users
-		WHERE user_id = #{id}
+	<select id="getInfo" resultMap="userMap">
+		SELECT
+		user_name, user_phone1, user_phone2,
+		user_email1, user_email2, addr_basic,
+		addr_detail, addr_zip_num,
+		f.bno,
+		f.title,
+		f.reg_date
+		FROM users u
+		LEFT JOIN freeboard f
+		ON u.user_id = f.writer
+		WHERE user_id
+		= #{id}
+		ORDER BY f.bno DESC
 	</select>
-	
+
 	<update id="updateUser">
-		UPDATE users 
-		SET user_pw = #{userPw}, user_name = #{userName}, user_phone1 = #{userPhone1}, user_phone2 = #{userPhone2},
-		 user_email1 = #{userEmail1}, user_email2 = #{userEmail2},
-		  addr_basic = #{addrBasic}, addr_detail = #{addrDetail}, addr_zip_num = #{addrZipNum}
+		UPDATE users
+		SET user_pw = #{userPw}, user_name = #{userName}, user_phone1 =
+		#{userPhone1}, user_phone2 = #{userPhone2},
+		user_email1 = #{userEmail1}, user_email2 = #{userEmail2},
+		addr_basic = #{addrBasic}, addr_detail = #{addrDetail}, addr_zip_num =
+		#{addrZipNum}
 		WHERE user_id = #{userId}
 	</update>
 

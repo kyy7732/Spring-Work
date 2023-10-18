@@ -57,7 +57,7 @@
             c. PUT - 수정
             d. DELETE - 삭제
             */
-            xhr.open('POST', '/myweb/rest/object'); // (보낼 요청 방식, 요청 URL)
+            xhr.open('POST', '${pageContext.request.contextPath}/rest/object'); // (보낼 요청 방식, 요청 URL)
 
             // 3. 서버로 전송할 데이터를 제작합니다. (JSON은 언어가 아니고 표기법일뿐이다)
             // 제작하는 데이터의 형식은 JSON 형태여야 합니다. json은 자바스크립트가 아니고 표기법만 유사할 뿐이다.

@@ -17,7 +17,7 @@
                             <tbody class="t-control">
                                 <tr>
                                     <td class="t-title">NAME</td>
-                                    <td><input class="form-control input-sm" name="writer"></td>
+                                    <td><input class="form-control input-sm" name="writer" value="${login}" readonly></td> <!-- session.scope.login인데 이름이 똑같아서 생략 -->
                                 </tr>
                                 <tr>
                                     <td class="t-title">TITLE</td>
@@ -33,7 +33,7 @@
                         </table>
                         <div class="titlefoot">
                             <button type="submit" class="btn">등록</button>
-                            <button type="button" class="btn" onclick="location.href='/myweb/freeboard/freeList'">목록</button>
+                            <button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/freeboard/freeList'">목록</button>
                             <!-- button type생략시 submit으로 동작 -->
                         </div>
                     </form>

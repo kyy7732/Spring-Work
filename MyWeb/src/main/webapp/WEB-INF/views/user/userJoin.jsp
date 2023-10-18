@@ -10,7 +10,7 @@
                 <div class="titlebox">
                     회원가입
                 </div>
-                <form action="/myweb/user/join" method="post" name="joinForm">
+                <form action="${pageContext.request.contextPath}/user/join" method="post" name="joinForm">
                     <div class="form-group">
                         <!--사용자클래스선언-->
                         <label for="id">아이디</label>
@@ -63,7 +63,6 @@
                                 <option>@naver.com</option>
                                 <option>@daum.net</option>
                                 <option>@gmail.com</option>
-                                <option>@hanmail.com</option>
                             </select>
                             <div class="input-group-addon">
                                 <button type="button" id="mail-check-btn" class="btn btn-primary">이메일 인증</button>
@@ -135,7 +134,7 @@
         const xhr = new XMLHttpRequest();
 
         // 서버 요청 정보 설정
-        xhr.open('GET', `/myweb/user/\${userId}`) // /myweb/user/idCheck처럼 url작성을 권장하지않음 서버 요청 정보로만 확인
+        xhr.open('GET', `${pageContext.request.contextPath}/user/\${userId}`) // ${pageContext.request.contextPath}/user/idCheck처럼 url작성을 권장하지않음 서버 요청 정보로만 확인
         xhr.send(); // url을 통해서 데이터가 전돨되기 때문에 send()에 아무것도 안썼다.
 
         xhr.onload = function() {
@@ -157,7 +156,7 @@
         
 
         // fetch('url', {요청 관련 정보를 담은 객체(GET방식에서는 따로 전달 안함.)})
-        fetch('/myweb/user/' + userId)
+        fetch('${pageContext.request.contextPath}/user/' + userId)
         // Promise 객체의 상태가 요청 성공일 시 데이터 후속 처리 진행.
         .then(res => { // 먼저 진행 후 다음 then실행
             // fetch 함수를 통해 비동기 통신이 실행되고,
@@ -184,7 +183,7 @@
 
         // 비동기 요청을 fetch()로 보내고 결과를 확인하기.
         // = return res.text(); 화살표 함수 내의 코드가 한 줄이고, 그것이 return이라면 괄호와 return 생략 가능
-        fetch('/myweb/user/id/' + userId)
+        fetch('${pageContext.request.contextPath}/user/id/' + userId)
             .then(res => res.text()) // 요청 완료 후 응답 정보에서 텍스트 데이터가 담긴 Promise 반환.
             .then(data => { // 텍스트 데이터만 담긴 Promise 객체로부터 data를 전달받음.
                 if (data === 'ok') {
@@ -209,7 +208,7 @@
         const email = document.getElementById('userEmail1').value + document.getElementById('userEmail2').value;
         console.log('완성된 email: ', email);
 
-        fetch('/myweb/user/email', { 
+        fetch('${pageContext.request.contextPath}/user/email', { 
             method: 'post',
             headers: {
                 'Content-Type': 'text/plain'
@@ -325,26 +324,9 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*아이디 형식 검사 스크립트*/
     var id = document.getElementById("userId");
-    id.onkeyup = function () {
+    id.onkeyup = function () { // 키를 눌럿다 땔때 발생
         /*
             자바스크립트의 정규표현식 입니다
             정규표현식: 문자열 내의 특정 문자 조합을 찾기 위한 패턴입니다.
@@ -353,8 +335,7 @@
         */
 
 
-
-        var regex = /^[A-Za-z0-9+]{8,12}$/; // A~Z,a~z,0~9가 (8~12자리까지) 들어갈수있다
+        var regex = /^[A-Za-z0-9+]{8,12}$/; // A~Z,a~z,0~9가 (8~12자리까지) 들어갈수있다 한글을 이용하려면 가 - 힣 넣으면 됨
         // test(문자열) -> 정규표현식의 규칙에 어긋나지 않는 문자라면 true, 어긋난다면 false
         if (regex.test(document.getElementById("userId").value)) {
             document.getElementById("userId").style.borderColor = "green";
@@ -367,6 +348,7 @@
             idFlag = false;
         }
     }
+
     /*비밀번호 형식 검사 스크립트*/
     var pw = document.getElementById("userPw");
     pw.onkeyup = function () {
