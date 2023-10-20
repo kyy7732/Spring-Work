@@ -2,14 +2,16 @@ package com.spring.myweb.reply.service;
 
 import java.util.List;
 
+import com.spring.myweb.reply.dto.ReplyDeleteDTO;
 import com.spring.myweb.reply.dto.ReplyListResponseDTO;
-import com.spring.myweb.reply.dto.ReplyRegistDTO;
+import com.spring.myweb.reply.dto.ReplyRequestDTO;
+import com.spring.myweb.reply.dto.ReplyUpdateRequestDTO;
 import com.spring.myweb.reply.entity.Reply;
 
 public interface IReplyService {
 
 	// 댓글 등록
-	void replyRegist(ReplyRegistDTO dto);
+	void replyRegist(ReplyRequestDTO dto);
 	
 	// 목록 요청
 	List<ReplyListResponseDTO> getList(int bno, int pageNum);
@@ -23,9 +25,12 @@ public interface IReplyService {
 	String pwCheck(int rno);
 	
 	// 댓글 수정
-	void update(Reply reply);
+	String update(ReplyUpdateRequestDTO dto);
 	
 	// 댓글 삭제
-	void delete(int rno);
+	String delete(ReplyDeleteDTO dto);
+
+	// 댓글 삭제 (선생님꺼)
+//	String delete(int rno, String replyPw);
 	
 }

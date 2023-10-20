@@ -42,7 +42,10 @@ public interface IReplyMapper {
 	void update(Reply reply);
 	
 	// 댓글 삭제
-	void delete(int rno);
+	void delete(Reply reply);
+
+	// 댓글 삭제 (선생님꺼)
+//	void delete(int rno);
 	
 }
 
