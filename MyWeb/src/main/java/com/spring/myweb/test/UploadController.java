@@ -87,8 +87,6 @@ public class UploadController {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return "fileupload/upload_ok";
 	}
 	
@@ -109,12 +107,8 @@ public class UploadController {
 				e.printStackTrace();
 			}
 		}
-		
 		return "fileupload/upload_ok";
 	}
-	
-	
-	
 }
 
 

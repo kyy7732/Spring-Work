@@ -288,11 +288,11 @@
                 document.getElementById('modalRno').value = rno;
 
                 // 댓글 내용도 가져와서 모달에 뿌려주자.
-                const content = e.target.parentNode.nextElementSibling.textContent; // parentNode: reply group그룹에서 nextele 다음 요소
+                const content = e.target.parentNode.nextElementSibling.textContent; // parentNode: reply group그룹에서 nextelementSibling 다음 요소
                 console.log('댓글 내용: ', content);
 
                 // 3. 모달 창 하나를 이용해서 상황에 맞게 수정 / 삭제 모달을 제공해야 한다.
-                // 조건문을 작성 (수정 or 삭제에 따라 모달 디자인을 조정)
+                // (조건문을 작성 수정 or 삭제에 따라 모달 디자인을 조정)
                 // replyModify클래스가 있는지
                 if(e.target.classList.contains('replyModify')) { // classList: arrayList를 통해 모든 클래스 이름을 받아옴
                     // 수정 버튼을 눌렀으므로 수정 모달 형식으로 꾸며주겠다.
@@ -389,7 +389,6 @@
                         // JSON.strigify는 문자열로 보내지므로 이렇게 보냄 2개이상일때는 무조건 JSON으로 보내야함
                         'replyPw': replyPw 
                     })
-
                 };
 
             fetch('${pageContext.request.contextPath}/reply/' + rno, reqObj)
@@ -407,8 +406,6 @@
                         getList(1, true);
                     }
                 });
-
-
             }
 
             // 댓글 날짜 변환 함수

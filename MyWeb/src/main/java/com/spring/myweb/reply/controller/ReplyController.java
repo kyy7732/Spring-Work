@@ -83,8 +83,7 @@ public class ReplyController {
 	/*
 	@DeleteMapping("/{rno}")
 	public String delete(@PathVariable int rno, @RequestBody String replyPw) {
-		service.delete(rno,replyPw);
-		return null;
+		return service.delete(rno,replyPw);
 	}
 	*/
 }
