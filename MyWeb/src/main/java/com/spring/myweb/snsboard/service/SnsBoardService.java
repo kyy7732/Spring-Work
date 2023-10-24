@@ -6,21 +6,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.ibatis.reflection.ArrayUtil;
 import org.springframework.stereotype.Service;
 
 import com.spring.myweb.freeboard.dto.page.Page;
+import com.spring.myweb.snsboard.controller.SnsBoardController;
 import com.spring.myweb.snsboard.dto.SnsBoardRequestDTO;
 import com.spring.myweb.snsboard.dto.SnsBoardResponseDTO;
 import com.spring.myweb.snsboard.entity.SnsBoard;
 import com.spring.myweb.snsboard.mapper.ISnsBoardMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SnsBoardService {
 
 	private final ISnsBoardMapper mapper;
@@ -35,7 +40,7 @@ public class SnsBoardService {
 //	 	String fileLoca = now.format(datetime);
 		
 		// 기본 경로는 C:/test/upload로 사용 하겠습니다.
-		 String uploadPath = "C:/test/upload";
+		 String uploadPath = "C:/test/upload/";
 		 
 		// 폴더가 존재하지 않다면 새롭게 생성해 주시라~
 		 File folder = new File(uploadPath, getFolder());
@@ -105,7 +110,21 @@ public class SnsBoardService {
 	public SnsBoardResponseDTO content(int bno) {
 		return new SnsBoardResponseDTO(mapper.getDetail(bno));
 	}
-	
+
+	public void delete(int bno) {
+		mapper.delete(bno);
+	}
+
+	public String searchLike(Map<String, String> params) {
+		if(mapper.searchLike(params) == 0) {
+			mapper.createLike(params);
+			return "like";
+		} else {
+			mapper.deleteLike(params);
+			return "delete";
+		}
+	}
+
 	
 }
 
