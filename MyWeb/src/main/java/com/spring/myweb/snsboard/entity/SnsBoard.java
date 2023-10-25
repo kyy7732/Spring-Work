@@ -1,6 +1,7 @@
 package com.spring.myweb.snsboard.entity;
 /*
  -- SNS 게시판
+
 CREATE TABLE snsboard(
     bno NUMBER PRIMARY KEY,
     writer VARCHAR2(50) NOT NULL,
@@ -46,6 +47,9 @@ public class SnsBoard {
 	private String fileRealName;
 	private String content;
 	private LocalDateTime regDate;
+	
+	// 좋아요 개수가 몇 개인지를 알려주는 변수 추가.
+	private int likeCnt;
 	
 }
 

@@ -92,7 +92,9 @@ public class UserController {
 	@GetMapping("/userMypage")
 	public void userMypage(HttpSession session, Model model) {
 		// 마이페이지는 로그인 한 사람만 이동 가능 -> 세션에 아이디가 있다!
-		String id = (String) session.getAttribute("login"); 
+		String id = (String) session.getAttribute("login");
+		System.out.println("session값 : " + session.getAttribute("login"));
+		System.out.println("session값 : " + session);
 		model.addAttribute("userInfo", service.getInfo(id));
 		
 		
